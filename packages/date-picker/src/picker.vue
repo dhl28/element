@@ -18,18 +18,16 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
-    ref="reference">
-    <i slot="prefix"
-      class="el-input__icon"
-      :class="triggerClass"
-      @click="handleFocus">
-    </i>
-    <i slot="suffix"
+    ref="reference"
+  >
+    <i slot="prefix" class="el-input__icon" :class="triggerClass" @click="handleFocus"></i>
+    <i
+      slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
       :class="[showClose ? '' + clearIcon : '']"
-      v-if="haveTrigger">
-    </i>
+      v-if="haveTrigger"
+    ></i>
   </el-input>
   <div
     class="el-date-editor el-range-editor el-input__inner"
@@ -45,7 +43,8 @@
     @keydown="handleKeydown"
     ref="reference"
     v-clickoutside="handleClose"
-    v-else>
+    v-else
+  >
     <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
     <input
       autocomplete="off"
@@ -58,7 +57,8 @@
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
-      class="el-range-input">
+      class="el-range-input"
+    />
     <slot name="range-separator">
       <span class="el-range-separator">{{ rangeSeparator }}</span>
     </slot>
@@ -73,13 +73,14 @@
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
-      class="el-range-input">
+      class="el-range-input"
+    />
     <i
       @click="handleClickIcon"
       v-if="haveTrigger"
       :class="[showClose ? '' + clearIcon : '']"
-      class="el-input__icon el-range__close-icon">
-    </i>
+      class="el-input__icon el-range__close-icon"
+    ></i>
   </div>
 </template>
 
@@ -351,6 +352,10 @@ export default {
     startPlaceholder: String,
     endPlaceholder: String,
     prefixIcon: String,
+    showWeekNumber: {
+      type: Boolean,
+      default: false
+    },
     clearIcon: {
       type: String,
       default: 'el-icon-circle-close'
@@ -831,6 +836,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.showWeekNumber = this.showWeekNumber;
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
